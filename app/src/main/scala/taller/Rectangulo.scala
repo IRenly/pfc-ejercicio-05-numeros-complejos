@@ -8,15 +8,15 @@ package taller
 class Rectangulo(b: Int, h: Int) {
 
   // Selectoras: la base y la altura con que se construyó el rectángulo.
-  def base: Int = 0 // Completar
+  def base: Int = b
 
-  def altura: Int = 0 // Completar
+  def altura: Int = h
 
   def area: Int = {
     base * altura
   }
 
-  def perimetro: Int = { // Completar
+  def perimetro: Int = {
     (2 * this.base) + (2 * this.altura)
   }
 
