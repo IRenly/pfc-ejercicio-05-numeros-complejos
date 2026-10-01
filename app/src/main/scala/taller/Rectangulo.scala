@@ -12,24 +12,40 @@ class Rectangulo(b: Int, h: Int) {
 
   def altura: Int = 0 // Completar
 
-  def area: Int = 0 // Completar
+  def area: Int = {
+    base * altura
+  }
 
-  def perimetro: Int = 0 // Completar
+  def perimetro: Int = { // Completar
+    (2 * this.base) + (2 * this.altura)
+  }
 
-  def esCuadrado: Boolean = false // Completar
+  def esCuadrado: Boolean =  {
+    if (this.base == this.altura) true
+    else
+      false
+  }
 
   // El rectángulo con base y altura intercambiadas.
-  def rotar: Rectangulo = new Rectangulo(0, 0) // Completar
+  def rotar: Rectangulo = new Rectangulo(altura, base)
 
   // El rectángulo con los dos lados multiplicados por k.
-  def escalar(k: Int): Rectangulo = new Rectangulo(0, 0) // Completar
+  def escalar(k: Int): Rectangulo = new Rectangulo(k*this.base, k*this.altura)
 
   // Si este rectángulo entra dentro de otro, tal cual o rotado.
-  def cabeEn(otro: Rectangulo): Boolean = false // Completar
+  def cabeEn(otro: Rectangulo): Boolean = {
+    val cabeBien = otro.base >= this.base && otro.altura >= this.altura
+    val cabeRotado = otro.base >= this.altura && otro.altura>= this.base
+
+    cabeBien || cabeRotado
+  }
 
   // El de mayor área entre este y otro; con áreas iguales, este.
-  def elMayor(otro: Rectangulo): Rectangulo = new Rectangulo(0, 0) // Completar
+  def elMayor(otro: Rectangulo): Rectangulo = {
+    if (otro.area > this.area) otro
+    else this
+  }
 
   // La forma "3x4": base, la letra x y altura.
-  override def toString: String = "" // Completar
+  override def toString: String = s"${base}x${altura}" // Completar
 }
