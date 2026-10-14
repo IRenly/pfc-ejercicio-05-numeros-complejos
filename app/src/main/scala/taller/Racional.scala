@@ -7,34 +7,61 @@ package taller
   * Tal como está compila y las pruebas quedan en rojo.
   */
 class Racional(x: Int, y: Int) {
-
   // Precondición del constructor: el denominador no es cero.
-  // Completar
+  require(y != 0, "el denominador es invalido" );
 
   // El máximo común divisor de dos enteros no negativos.
-  private def mcd(a: Int, b: Int): Int = 0 // Completar
+  private def mcd(a: Int, b: Int): Int = {
+    if (b == 0) a
+    else (mcd(b, a % b))
+  }
 
   // Numerador y denominador ya normalizados.
-  def numer: Int = 0 // Completar
+  private val divisor = mcd(x.abs, y.abs)
 
-  def denom: Int = 1 // Completar
+  def numer: Int = {
+    if (y < 0) -1*(x/divisor)
+    else x/divisor
 
-  def +(r: Racional): Racional = new Racional(0, 1) // Completar
+  }
 
-  def -(r: Racional): Racional = new Racional(0, 1) // Completar
+  def denom: Int = {
+    y.abs/divisor
+  }
 
-  def *(r: Racional): Racional = new Racional(0, 1) // Completar
+  def +(r: Racional): Racional = {
+    new Racional(numer * r.denom + r.numer * denom, denom * r.denom)
+  }
 
-  def /(r: Racional): Racional = new Racional(0, 1) // Completar
+  def -(r: Racional): Racional = {
+    new Racional(numer * r.denom - r.numer * denom, denom * r.denom)
+  }
+
+  def *(r: Racional): Racional = {
+    new Racional(numer * r.numer, denom * r.denom)
+  }
+
+  def /(r: Racional): Racional = {
+    new Racional(numer * r.denom, denom * r.numer)
+    }
 
   // Si los dos racionales representan el mismo número.
-  def ==(r: Racional): Boolean = false // Completar
+  def ==(r: Racional): Boolean = {
+    numer == r.numer && denom == r.denom
+  }
 
-  def <(r: Racional): Boolean = false // Completar
-
+  def <(r: Racional): Boolean = {
+    numer * r.denom < denom * r.numer
+  }
   // El mayor de los dos.
-  def max(r: Racional): Racional = new Racional(0, 1) // Completar
+  def max(r: Racional): Racional = {
+    if( this < r ) r
+    else this
+  } // Completar
 
   // "n/d", o solo "n" cuando el denominador es 1.
-  override def toString: String = "" // Completar
-}
+  override def toString: String = {
+    if (denom == 1) s"${numer}"
+    else s"$numer/$denom"
+    }
+  }
